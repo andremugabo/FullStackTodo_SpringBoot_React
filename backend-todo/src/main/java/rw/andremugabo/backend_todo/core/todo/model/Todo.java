@@ -17,6 +17,5 @@ public class Todo extends AbstractBaseEntity {
     private String title;
     @Column(nullable = false)
     private String description;
-    @Column(nullable = false)
     private Boolean completed = Boolean.FALSE;
 }

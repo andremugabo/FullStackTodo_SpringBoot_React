@@ -9,8 +9,7 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Setter @Getter @NoArgsConstructor @AllArgsConstructor
-@MappedSuperclass
 public abstract class AbstractBaseDtoEntity {
     private UUID id;
-    private boolean active;
+    private boolean active = Boolean.TRUE;
 }

@@ -1,6 +1,7 @@
 package rw.andremugabo.backend_todo.core.base;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
@@ -14,8 +15,9 @@ import java.util.UUID;
 @MappedSuperclass
 public abstract class AbstractBaseEntity extends AbstractAuditEntity{
     @Id
+    @GeneratedValue
     @UuidGenerator
     private UUID id;
-    @Column(name = "active", nullable = false)
+    @Column(name = "active")
     private boolean active = Boolean.TRUE;
 }

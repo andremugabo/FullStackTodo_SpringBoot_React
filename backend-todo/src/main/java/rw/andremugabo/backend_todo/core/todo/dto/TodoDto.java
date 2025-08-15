@@ -4,13 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import rw.andremugabo.backend_todo.core.base.AbstractBaseDtoEntity;
 
-import javax.swing.text.StyledEditorKit;
+import java.util.UUID;
 
-@Setter @Getter @NoArgsConstructor @AllArgsConstructor
-public class TodoDto extends AbstractBaseDtoEntity {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class TodoDto {
+    private UUID id;
     private String title;
     private String description;
-    private Boolean completed;
+    private boolean completed;
+    private boolean active;
 }
