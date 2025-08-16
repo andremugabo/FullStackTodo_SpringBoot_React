@@ -1,9 +1,12 @@
 package rw.andremugabo.backend_todo.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -16,7 +19,12 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @EnableMethodSecurity
 @Configuration
+@RequiredArgsConstructor
 public class SpringSecurityConfig {
+
+
+    private final UserDetailsService userDetailsService;
+
 
     @Bean
     public static PasswordEncoder passwordEncoder(){
@@ -34,6 +42,14 @@ public class SpringSecurityConfig {
 //                                    .requestMatchers(HttpMethod.PATCH,"/api/**").hasRole("ADMIN")
 //                                    .requestMatchers(HttpMethod.GET,"/api/**").hasAnyRole("ADMIN","USER")
 //                                    .requestMatchers(HttpMethod.GET,"/api/**").permitAll()
+                                    .requestMatchers("/api/auth/**").permitAll()
+                                    .requestMatchers(
+                                            "/swagger-ui/**",
+                                            "/swagger-ui.html",
+                                            "/v3/api-docs/**",
+                                            "/swagger-resources/**",
+                                            "/webjars/**"
+                                    ).permitAll()
                                     .anyRequest().authenticated();
                         }
                 )
@@ -43,24 +59,30 @@ public class SpringSecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
-        UserDetails ramesh = User.builder()
-                .username("ramesh")
-                .password(passwordEncoder().encode("password"))
-                .roles("USER")
-                .build();
-
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(ramesh, admin);
-
-
-
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
     }
+
+
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        UserDetails ramesh = User.builder()
+//                .username("ramesh")
+//                .password(passwordEncoder().encode("password"))
+//                .roles("USER")
+//                .build();
+//
+//        UserDetails admin = User.builder()
+//                .username("admin")
+//                .password(passwordEncoder().encode("admin"))
+//                .roles("ADMIN")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(ramesh, admin);
+//
+//
+//
+//    }
 
 
 }

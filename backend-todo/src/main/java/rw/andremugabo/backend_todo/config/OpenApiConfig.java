@@ -17,7 +17,7 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 // Add security requirement globally
-                .addSecurityItem(new SecurityRequirement().addList("basicAuth"))
+//                .addSecurityItem(new SecurityRequirement().addList("basicAuth"))
                 // Define security scheme
                 .components(new Components()
                         .addSecuritySchemes("basicAuth",
