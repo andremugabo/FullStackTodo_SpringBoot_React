@@ -116,9 +116,14 @@ The frontend will run on `http://localhost:3000`.
 
 ## Screenshots
 
-![Dashboard](pic/dashboard.png)
-![Add Todo](pic/add-todo.png)
-![Completed Todo](pic/completed-todo.png)
+![1](pic/1.png)
+![2](pic/2.png)
+![3](pic/3.png)
+![4](pic/4.png)
+![5](pic/5.png)
+![6](pic/6.png)
+![7](pic/7.png)
+
 
 ---
 
