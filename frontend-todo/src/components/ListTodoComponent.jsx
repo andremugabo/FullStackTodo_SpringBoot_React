@@ -30,7 +30,7 @@ const ListTodoComponent = () => {
             .catch((error) => {
                 console.error(error);
                 setError("Cannot connect to server. Please try again later.");
-                setLoading(false);
+                setLoading(true);
             });
     };
 

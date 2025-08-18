@@ -16,6 +16,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import rw.andremugabo.backend_todo.security.JwtAuthenticationEntryPoint;
+import rw.andremugabo.backend_todo.security.JwtAuthenticationFilter;
 
 @EnableMethodSecurity
 @Configuration
@@ -24,6 +27,8 @@ public class SpringSecurityConfig {
 
 
     private final UserDetailsService userDetailsService;
+    private final JwtAuthenticationEntryPoint authenticationEntryPoint;
+    private final JwtAuthenticationFilter authenticationFilter;
 
 
     @Bean
@@ -50,10 +55,15 @@ public class SpringSecurityConfig {
                                             "/swagger-resources/**",
                                             "/webjars/**"
                                     ).permitAll()
+                                    .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                                     .anyRequest().authenticated();
                         }
                 )
                 .httpBasic(Customizer.withDefaults());
+        // Jwt related
+        http.exceptionHandling(exception -> exception
+                .authenticationEntryPoint(authenticationEntryPoint));
+        http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
