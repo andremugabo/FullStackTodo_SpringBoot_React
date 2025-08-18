@@ -32,7 +32,7 @@ public class TodoController {
     @Operation(
             summary = "Create a Todo record",
             description = "Create a new todo record for a given user ",
-            security = { @SecurityRequirement(name = "basicAuth")}
+            security = { @SecurityRequirement(name = "bearerAuth")}
     )
     @PostMapping("/create")
     public ResponseEntity<TodoDto> addTodo(@RequestBody TodoDto todoDto){
@@ -46,7 +46,7 @@ public class TodoController {
     @Operation(
             summary = "Get Todo by Id",
             description = "Get one todo by id",
-            security = { @SecurityRequirement(name = "basicAuth")}
+            security = { @SecurityRequirement(name = "bearerAuth")}
     )
     @GetMapping("/{id}")
     public ResponseEntity<TodoDto> getTodo(@PathVariable("id") UUID todoId){
@@ -60,7 +60,7 @@ public class TodoController {
     @Operation(
             summary = "Get all todos",
             description = "Get all registered todos",
-            security = { @SecurityRequirement(name = "basicAuth")}
+            security = { @SecurityRequirement(name = "bearerAuth")}
     )
     @GetMapping("/")
     public ResponseEntity<Page<TodoDto>> getAllTodo(
@@ -77,7 +77,7 @@ public class TodoController {
     @Operation(
             summary = "Update Todo by Id",
             description = "Update the selected todo by id",
-            security = { @SecurityRequirement(name = "basicAuth")}
+            security = { @SecurityRequirement(name = "bearerAuth")}
     )
     @PutMapping("/{id}")
     public ResponseEntity<TodoDto> updateTodo(@RequestBody TodoDto todoDto,@PathVariable("id") UUID id){
@@ -91,7 +91,7 @@ public class TodoController {
     @Operation(
             summary = "Complete a todo by Id",
             description = "Update the status of uncompleted todo to completed",
-            security = { @SecurityRequirement(name = "basicAuth")}
+            security = { @SecurityRequirement(name = "bearerAuth")}
     )
     @PatchMapping("/{id}/complete")
     public ResponseEntity<TodoDto> completedTodo(@PathVariable  UUID id){
@@ -105,7 +105,7 @@ public class TodoController {
     @Operation(
             summary = "Soft delete a Todo",
             description = "Soft delete a todo change it's active status to false",
-            security = { @SecurityRequirement(name = "basicAuth")}
+            security = { @SecurityRequirement(name = "bearerAuth")}
     )
     @PutMapping("/{id}/soft-delete")
     public ResponseEntity<TodoDto> softDelete(@PathVariable UUID id){
@@ -118,7 +118,7 @@ public class TodoController {
     @Operation(
             summary = "Incomplete a todo",
             description = "Incomplete todo bring back the complete status to false ",
-            security = { @SecurityRequirement(name = "basicAuth")}
+            security = { @SecurityRequirement(name = "bearerAuth")}
     )
     @PatchMapping("/{id}/incomplete")
     public ResponseEntity<TodoDto> inCompleted(@PathVariable UUID id){

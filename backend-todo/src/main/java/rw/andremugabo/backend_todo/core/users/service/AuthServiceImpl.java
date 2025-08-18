@@ -15,6 +15,7 @@ import rw.andremugabo.backend_todo.core.users.dto.RegisterDto;
 import rw.andremugabo.backend_todo.core.users.model.User;
 import rw.andremugabo.backend_todo.core.users.repository.UserRepository;
 import rw.andremugabo.backend_todo.exception.TodoAPIException;
+import rw.andremugabo.backend_todo.security.JwtTokenProvider;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,6 +30,7 @@ public class AuthServiceImpl implements AuthService{
     private final PasswordEncoder passwordEncoder;
     // We have to inject Authentication manager dependency for login
     private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Override
     public String register(RegisterDto registerDto) {
@@ -69,6 +71,7 @@ public class AuthServiceImpl implements AuthService{
                 loginDto.getPassword()
         ));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return "User logged-in successfully!.";
+        String token = jwtTokenProvider.generateToken(authentication);
+        return token;
     }
 }

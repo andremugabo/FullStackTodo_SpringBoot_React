@@ -1,0 +1,4 @@
+# Ignore application properties with secrets
+backend-todo/src/main/resources/application.properties
+.env
+
